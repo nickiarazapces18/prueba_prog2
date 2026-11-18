@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+        <html>
+          <head>
+            <title data-id="th-modified">Web Page</title>
+            
+          <meta property="og:title" content="Web Page" data-id="th-modified" ><meta name="description" content="code" data-id="th-modified" ><meta property="og:description" content="code" data-id="th-modified" ><meta property="og:image" content="https://tiiny.host/assets/logo-purple-bg.png" data-id="th-modified" ><meta property="og:image:width" content="1501" data-id="th-modified" ><meta property="og:image:height" content="1501" data-id="th-modified" ><meta property="og:image:type" content="image/png" data-id="th-modified" ><meta property="og:url" content="https://copper-glenine-53.tiiny.site/" data-id="th-modified" ><meta property="og:type" content="website" data-id="th-modified" ><script defer data-domain="copper-glenine-53.tiiny.site" src="https://analytics.tiiny.net/js/plausible.js"></script><script type="text/javascript" src="https://tiiny.host/ad-script.js"></script></head>
+          <body>
+            <!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Fredy IA</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .contenedor {
+      background-color: #1e1e1e;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+      width: 350px;
+      text-align: center;
+    }
+    input {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #444;
+      background-color: #2c2c2c;
+      color: #fff;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #b71c1c;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    button:hover {
+      background-color: #d32f2f;
+    }
+    #resultado {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #ff5252;
+      min-height: 25px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="contenedor">
+  <h3>Hola soy Fredy una IA en desarrollo</h3>
+  
+  <label for="peticion">Introduce la Peticion:</label>
+  <input type="text" id="peticion" autocomplete="off" placeholder="Escribe la peticion...">
+  
+  <label for="pregunta">Pregunta lo que quieras:</label>
+  <input type="text" id="pregunta" autocomplete="off" placeholder="Escribe tu pregunta...">
+  
+  <button id="btn-preguntar">Respuesta</button>
+  
+  <div id="resultado"></div>
+</div>
+
+<script>
+  const inputPeticion = document.getElementById('peticion');
+  const inputPregunta = document.getElementById('pregunta');
+  const btnPreguntar = document.getElementById('btn-preguntar');
+  const divResultado = document.getElementById('resultado');
+  const fraseFalsa = "Fredy por favor responde esta pregunta";  
+  let modoTruco = false;
+  let respuestaSecreta = "";
+  let indiceFrase = 0; 
+  inputPeticion.addEventListener('keydown', function(evento) {
+    const tecla = evento.key;
+   
+    if (tecla === '.') {
+      evento.preventDefault(); 
+      modoTruco = !modoTruco;     
+      if (modoTruco && indiceFrase < fraseFalsa.length) {
+        inputPeticion.value += fraseFalsa[indiceFrase];
+        indiceFrase++;
+      }
+      return;
+    }    
+    if (modoTruco) {    
+      if (tecla === 'Backspace') {
+        evento.preventDefault();
+        if (respuestaSecreta.length > 0) {
+          respuestaSecreta = respuestaSecreta.slice(0, -1);
+          inputPeticion.value = inputPeticion.value.slice(0, -1);
+          if (indiceFrase > 0) indiceFrase--;
+        }
+        return;
+      }      
+      if (tecla.length === 1) {
+        evento.preventDefault();        
+        respuestaSecreta += tecla;       
+        if (indiceFrase < fraseFalsa.length) {
+          inputPeticion.value += fraseFalsa[indiceFrase];
+          indiceFrase++;
+        } else {         
+          inputPeticion.value += " ";
+        }
+      }
+    }
+  }); 
+  btnPreguntar.addEventListener('click', function() {
+    if (respuestaSecreta.trim() !== "") {
+      divResultado.textContent = "Fredy dice: " + respuestaSecreta;
+    } else {      
+      const respuestasGenericas = [
+        "No quiero responder ahora",
+        "No me agradas",
+        "Tu pregunta es trivial",
+        "No confio en ti",
+        "Pregunta de nuevo mas tarde",
+        "Mis energias estan bajas"
+      ];
+      const aleatoria = respuestasGenericas[Math.floor(Math.random() * respuestasGenericas.length)];
+      divResultado.textContent = "Fredy dice: " + aleatoria;
+    }    
+    modoTruco = false;
+    respuestaSecreta = "";
+    indiceFrase = 0;
+  });
+</script>
+</body>
+</html>
